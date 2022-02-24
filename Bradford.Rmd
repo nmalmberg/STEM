@@ -1,0 +1,44 @@
+---
+title: "Determining the Concentration of a Protein Solution with a Bradford Assay"
+author: "Nathan Malmberg"
+date: "2/23/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Many foods are nutritionally valuable in large part because of their protein content. Braums has promoted their milkshakes over the customary soft drink meal accompaniment with this particular benefit. The current Braums menu lists the protein content of different sizes of shake. A 12 oz shake is listed as containing up to 21 g of protein.
+
+Protein content can be measured using a Bradford assay.
+
+# Methods
+
+Pipet 5 uL of each standard protein solution (ranging from 0 to 1.4 mg/mL) into separate wells of a 96-well plate (first column?). Pipet 5 uL of the unknown protein solution into another well. To each well of the plate with a protein solution, add 250 uL of Bradford reagent. Allow the plate to sit at room temperature for 10 minutes, then read the plate in a plate reader with a 595 nm filter. Record the absorbances of the standard protein solutions (and their concentrations) in the absorbance.dat file, and record the absorbance of the unknown protein solution in the code block below.
+
+# Analysis
+
+```{r}
+standards <- read.table("absorbance.dat", header = TRUE)
+calibration <- lm(Concentration~Absorbance, data = standards)
+plot(Concentration~Absorbance, data=standards)
+abline(calibration)
+# Replace the semicolon below with the absorbance of the protein
+# solution of interest.
+sampleabs <- ;
+sampleconcentration <- predict(calibration,newdata=list(Absorbance=sampleabs))
+points(sampleabs, sampleconcentration, pch=22, col='red')
+```
+
+Use the code block below to find the value of the sample's protein
+concentration. If calculators are scarce, you can use the code block to
+calculate the mass of protein in the sample, using the volume of the
+sample and any necessary conversions (such as 29.57 mL in an ounce) or dilution factors.
+
+```{r}
+sampleconcentration
+```
+
