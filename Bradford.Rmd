@@ -39,6 +39,7 @@ calculate the mass of protein in the sample, using the volume of the
 sample and any necessary conversions (such as 29.57 mL in an ounce) or dilution factors.
 
 ```{r}
-sampleconcentration
+content <- sampleconcentration*100*12*29.57/1000
+content
 ```
 
