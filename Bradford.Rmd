@@ -22,6 +22,7 @@ Pipet 5 uL of each standard protein solution (ranging from 0 to 1.4 mg/mL) into 
 # Analysis
 
 ```{r}
+# Read in the absorbances
 standards <- read.table("absorbance.dat", header = TRUE)
 calibration <- lm(Concentration~Absorbance, data = standards)
 plot(Concentration~Absorbance, data=standards)
